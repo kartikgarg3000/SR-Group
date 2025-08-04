@@ -1,43 +1,91 @@
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { navLinks } from "@/lib/data";
+
+const businessLinks = [
+  { href: '/chemicals', label: 'SR Trade Vision' },
+  { href: '/industrial', label: 'SR Industrial Corp' }
+];
+
+const socialLinks = [
+  { href: 'https://wa.me/91XXXXXXXXXX', icon: FaWhatsapp, label: 'WhatsApp' },
+  { href: 'https://facebook.com/srgroup', icon: FaFacebook, label: 'Facebook' },
+  { href: 'https://linkedin.com/company/srgroup', icon: FaLinkedin, label: 'LinkedIn' }
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-10 mt-20">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-        {/* Brand */}
-        <div>
-          <h2 className="text-2xl font-bold">SR Group</h2>
-          <p className="mt-2 text-sm text-gray-400">
-            Excellence in Chemicals & Dry Fruits
-          </p>
-        </div>
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand & Tagline */}
+          <div className="md:col-span-1">
+            <h2 className="text-3xl font-bold text-white">SR Group</h2>
+            <p className="mt-2 text-sm text-gray-400">
+              Pioneering Excellence in Chemical and Industrial Solutions.
+            </p>
+          </div>
 
-        {/* Navigation */}
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Quick Links</h3>
-          <ul className="text-sm space-y-1">
-            <li><Link href="/" className="hover:text-yellow-400">Home</Link></li>
-            <li><Link href="/chemicals" className="hover:text-yellow-400">Chemicals</Link></li>
-            <li><Link href="/dryfruits" className="hover:text-yellow-400">Dry Fruits</Link></li>
-            <li><Link href="#about" className="hover:text-yellow-400">About</Link></li>
-            <li><Link href="#contact" className="hover:text-yellow-400">Contact</Link></li>
-          </ul>
-        </div>
+          {/* Quick Links */}
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-gray-300">Quick Links</h3>
+            <ul className="space-y-1">
+              {navLinks.map(link => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href} 
+                    className="text-gray-400 hover:text-brand-yellow transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Social Media */}
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
-          <div className="flex space-x-4 text-xl">
-            <a href="#" className="hover:text-yellow-400" aria-label="Facebook"><FaFacebook /></a>
-            <a href="#" className="hover:text-yellow-400" aria-label="Instagram"><FaInstagram /></a>
-            <a href="#" className="hover:text-yellow-400" aria-label="LinkedIn"><FaLinkedin /></a>
+          {/* Business Verticals */}
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-gray-300">Our Businesses</h3>
+            <ul className="text-sm space-y-1">
+              {businessLinks.map(business => (
+                <li key={business.href}>
+                  <Link 
+                    href={business.href} 
+                    className="text-gray-400 hover:text-brand-yellow transition-colors"
+                  >
+                    {business.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Social Media */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-300 mb-3">Connect With Us</h3>
+            <div className="flex space-x-4 text-2xl">
+              {socialLinks.map(({ href, icon: Icon, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-brand-yellow transition-colors"
+                  aria-label={label}
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-10 text-center text-sm text-gray-500 border-t border-gray-700 pt-4">
-        © {new Date().getFullYear()} SR Group. All rights reserved.
+      {/* Copyright */}
+      <div className="bg-black/20 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} SR Group. All rights reserved.
+        </div>
       </div>
     </footer>
   );
