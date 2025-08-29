@@ -2,30 +2,36 @@
 
 export const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Chemicals', href: '/chemicals' },
-  { label: 'Industrial', href: '/industrial' }, // Corrected from Dry Fruits
+  {
+    label: 'Our Businesses',
+    // This new structure allows for dropdown menus in the header
+    subLinks: [
+      { label: 'SR Trade Vision', href: '/chemicals' },
+      { label: 'SR Industrial Corp', href: '/industrial' },
+    ],
+  },
   { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const carouselSlides = [
   {
     title: 'Welcome to SR Group',
-    subtitle: 'Pioneering Excellence in Chemical and Industrial Solutions',
-    img: '/images/welcome-hero.jpg', // Use a high-quality, relevant image
+    subtitle: 'Pioneering Excellence in Industrial and Consumer Goods',
+    img: '/images/welcome-hero.jpg',
     href: '#about',
     isWelcome: true,
   },
   {
     title: 'SR Trade Vision',
-    subtitle: 'Innovative Industrial & Food-Grade Chemicals',
+    subtitle: 'Innovative Industrial Oils, Chemicals, and Machineries',
     img: '/images/chemicals-hero.jpg',
     href: '/chemicals',
     isWelcome: false,
   },
   {
     title: 'SR Industrial Corp',
-    subtitle: 'Engineering Tomorrow\'s Industrial Excellence',
+    subtitle: 'From High-Performance Industrial Solutions to Premium Dry Fruits',
     img: '/images/industrial-hero.jpg',
     href: '/industrial',
     isWelcome: false,
@@ -35,78 +41,126 @@ export const carouselSlides = [
 export const businessUnits = [
   {
     name: "SR Trade Vision",
-    description: "Sustainable and innovative chemical solutions trusted by leading industries and partners.",
+    description: "Sustainable and innovative industrial solutions trusted by leading industries and partners.",
     image: "/images/chemicals.jpg",
     href: "/chemicals",
   },
   {
     name: "SR Industrial Corp",
-    description: "Engineering excellence with cutting-edge industrial solutions and innovative manufacturing.",
+    description: "Building strong foundations with industrial chemicals and providing natural goodness with premium dry fruits.",
     image: "/images/industrial.jpg",
     href: "/industrial",
   }
 ];
 
 export const siteStats = [
-  { label: "Years of Excellence", value: 10, suffix: "+" },
-  { label: "Product Range", value: 30, suffix: "+" },
+  // Updated value to reflect history since 1983
+  { label: "Years In Business", value: 40, suffix: "+" },
+  { label: "Product Range", value: 50, suffix: "+" },
   { label: "Business Verticals", value: 2, suffix: "" },
 ];
 
-export const chemicalProducts = [
+export const industryCategories = [
   {
-    name: "Citric Acid",
-    desc: "Food-grade & industrial use",
-    image: "/images/products/citric-acid.jpg",
-    specifications: [
-      "Purity: ≥99.5%",
-      "Mesh size: 30-100",
-      "Packaging: 25kg HDPE bags"
+    categoryName: "Paint Industry",
+    categoryDesc: "Essential solvents, pigments, and additives for vibrant and durable coatings.",
+    products: [
+      {
+        name: "Titanium Dioxide",
+        desc: "Superior opacity and whiteness for premium paints.",
+        image: "/images/products/titanium-dioxide.jpg",
+      },
+      {
+        name: "Toluene",
+        desc: "High-purity solvent for thinning paints and coatings.",
+        image: "/images/products/toluene.jpg",
+      }
     ]
   },
-  // ... Add all other chemical products here
   {
-    name: "Sodium Hypochlorite",
-    desc: "Disinfectant & bleaching agent",
-    image: "/images/products/sodium-hypochlorite.jpg",
-    specifications: [
-      "Available Chlorine: 10-12%",
-      "pH: 11.5-13",
-      "Packaging: 30kg carboys"
+    categoryName: "Pharmaceutical Industry",
+    categoryDesc: "High-purity excipients and APIs for safe and effective formulations.",
+    products: [
+      {
+        name: "Isopropyl Alcohol (IPA)",
+        desc: "Pharma-grade (99.9%) for sterilization and as a solvent.",
+        image: "/images/products/ipa.jpg",
+      },
+      {
+        name: "Glycerine",
+        desc: "Used as a humectant, solvent, and sweetener in pharma.",
+        image: "/images/products/glycerine.jpg",
+      }
+    ]
+  },
+  {
+    categoryName: "Paper Industry",
+    categoryDesc: "Specialty chemicals to enhance paper quality, strength, and the pulping process.",
+    products: [
+      {
+        name: "Caustic Soda",
+        desc: "Essential for the chemical pulping of wood to produce paper.",
+        image: "/images/products/caustic-soda.jpg",
+      },
+      {
+        name: "Hydrogen Peroxide",
+        desc: "An environmentally friendly bleaching agent for paper pulp.",
+        image: "/images/products/hydrogen-peroxide.jpg",
+      }
+    ]
+  },
+  {
+    categoryName: "Pesticides Industry",
+    categoryDesc: "High-performance solvents and emulsifiers for effective crop protection formulations.",
+    products: [
+      {
+        name: "Cyclohexanone",
+        desc: "A key solvent used in the formulation of insecticides and herbicides.",
+        image: "/images/products/cyclohexanone.jpg",
+      },
+      {
+        name: "Emulsifiers",
+        desc: "Custom blends to ensure stable and effective pesticide emulsions.",
+        image: "/images/products/emulsifiers.jpg",
+      }
     ]
   }
 ];
 
-// We'll create some placeholder data for the new Industrial page
 export const industrialProducts = [
-    {
-    name: "Precision Bearings",
-    desc: "High-load capacity for heavy machinery",
-    image: "/images/products/bearings.jpg", // Replace with actual image path
-    specifications: [
-      "Material: Hardened Chrome Steel",
-      "Seals: Double-sided rubber seal",
-      "Tolerance: ABEC-5",
-    ]
+  {
+    name: "Sealan Chemical",
+    desc: "Advanced chemical solutions for construction and industrial applications.",
+    image: "/images/products/sealan-chemical.jpg",
   },
   {
-    name: "Hydraulic Systems",
-    desc: "Custom-built for industrial automation",
-    image: "/images/products/hydraulics.jpg",
-    specifications: [
-      "Pressure: Up to 350 bar",
-      "Flow Rate: 10-200 L/min",
-      "Reservoir: 50L to 500L capacity",
-    ]
+    name: "Almonds",
+    desc: "Premium quality almonds, rich in nutrients and flavor.",
+    image: "/images/products/almonds.jpg",
   },
   {
-    name: "Industrial Conveyor Belts",
-    desc: "Durable belts for material handling",
-    image: "/images/products/conveyor.jpg",
-    specifications: [
-      "Material: PVC, Rubber, PU",
-      "Width: 300mm to 1200mm",
-      "Feature: Heat & oil resistant",
-    ]
-  }
+    name: "Cashews",
+    desc: "Creamy and delicious cashews, perfect for snacking and cooking.",
+    image: "/images/products/cashews.jpg",
+  },
+  {
+    name: "Raw Cashew Nuts (RCN)",
+    desc: "High-quality raw cashew nuts for processing and export.",
+    image: "/images/products/rcn.jpg",
+  },
+  {
+    name: "Pistachios",
+    desc: "Nutritious and flavorful pistachios, a delightful and healthy snack.",
+    image: "/images/products/pista.jpg",
+  },
+  {
+    name: "Walnuts",
+    desc: "Rich and earthy walnuts, packed with omega-3 fatty acids.",
+    image: "/images/products/walnuts.jpg",
+  },
+  {
+    name: "Raisins",
+    desc: "Sweet and chewy raisins, a versatile and healthy dried fruit.",
+    image: "/images/products/raisins.jpg",
+  },
 ];
