@@ -4,14 +4,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { carouselSlides } from '@/lib/data'; // Import data
+// FIX 1: Import the 'Variants' type from framer-motion
+import { motion, Variants } from 'framer-motion'; 
+import { carouselSlides } from '@/lib/data'; 
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-const textVariants = {
+// FIX 2: Explicitly type the constant with Variants
+const textVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -89,7 +91,6 @@ export default function BusinessCarousel() {
         ))}
       </Swiper>
       
-      {/* Animated Scroll Down Indicator */}
       <motion.a 
         href="#about"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-white flex flex-col items-center"

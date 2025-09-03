@@ -5,7 +5,6 @@ import Image from "next/image";
 import { navLinks } from "@/lib/data";
 import {
   FaFacebook,
-  FaInstagram,
   FaLinkedin,
   FaWhatsapp,
   FaMapMarkerAlt,
