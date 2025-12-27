@@ -4,22 +4,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
-// FIX 1: Import the 'Variants' type from framer-motion
 import { motion, Variants } from 'framer-motion'; 
-import { carouselSlides } from '@/lib/data'; 
+import { carouselSlides } from '@/lib/data';
 
+// Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-// FIX 2: Explicitly type the constant with Variants
 const textVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.2 + 0.3, // Staggered delay
+      delay: i * 0.2 + 0.3,
       duration: 0.6,
       ease: 'easeOut',
     },
@@ -48,37 +47,68 @@ export default function BusinessCarousel() {
           <SwiperSlide key={index} className="h-screen">
             <div className="relative w-full h-full">
               <Image
-                src={slide.img} alt={slide.title} fill priority={index === 0}
-                className="object-cover" sizes="100vw" quality={90}
+                src={slide.img}
+                alt={slide.title}
+                fill
+                priority={index === 0}
+                className="object-cover"
+                sizes="100vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
               <div className="relative z-10 h-full flex items-center justify-start text-left">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white w-full">
                   <div className="max-w-2xl">
                     <motion.h2
-                      custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={textVariants}
-                      className={`font-extrabold mb-4 text-5xl md:text-7xl tracking-tighter`}
+                      custom={0}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={textVariants}
+                      className="font-extrabold mb-4 text-5xl md:text-7xl tracking-tighter"
                     >
                       {slide.title}
                     </motion.h2>
+
                     <motion.p
-                      custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={textVariants}
+                      custom={1}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={textVariants}
                       className="text-lg md:text-xl mb-8 text-white/90"
                     >
                       {slide.subtitle}
                     </motion.p>
-                    <motion.div custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={textVariants} className="flex flex-wrap gap-4">
+
+                    <motion.div
+                      custom={2}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={textVariants}
+                      className="flex flex-wrap gap-4"
+                    >
                       {slide.isWelcome ? (
                         <>
-                          <Link href="#about" className="inline-block bg-brand-yellow text-gray-900 px-8 py-3 rounded-full font-bold hover:bg-amber-300 transition-all duration-300 shadow-lg transform hover:scale-105">
+                          <Link
+                            href="#about"
+                            className="inline-block bg-brand-yellow text-gray-900 px-8 py-3 rounded-full font-bold hover:bg-amber-300 transition-all duration-300 shadow-lg transform hover:scale-105"
+                          >
                             Discover More
                           </Link>
-                          <Link href="#contact" className="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/20 transition-all duration-300">
+                          <Link
+                            href="#contact"
+                            className="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/20 transition-all duration-300"
+                          >
                             Contact Us
                           </Link>
                         </>
                       ) : (
-                        <Link href={slide.href} className="inline-block bg-brand-yellow text-gray-900 px-8 py-3 rounded-full font-bold hover:bg-amber-300 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        <Link
+                          href={slide.href}
+                          className="inline-block bg-brand-yellow text-gray-900 px-8 py-3 rounded-full font-bold hover:bg-amber-300 transition-all duration-300 shadow-lg transform hover:scale-105"
+                        >
                           Explore Products →
                         </Link>
                       )}
@@ -90,8 +120,8 @@ export default function BusinessCarousel() {
           </SwiperSlide>
         ))}
       </Swiper>
-      
-      <motion.a 
+
+      <motion.a
         href="#about"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-white flex flex-col items-center"
         initial={{ opacity: 0, y: -20 }}

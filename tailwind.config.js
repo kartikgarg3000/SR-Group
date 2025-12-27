@@ -7,11 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Your existing animations are perfectly fine.
       animation: {
-        'fade-in-up': 'fadeInUp 1s ease-out both',
-        'fade-in': 'fadeIn 0.5s ease-out both',
-        'slide-in-right': 'slideInRight 0.5s ease-out both',
+        'fade-in-up': 'fadeInUp 0.8s ease-out',
+        'fade-in': 'fadeIn 0.6s ease-out',
+        'slide-in-right': 'slideInRight 0.6s ease-out',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        'shimmer': 'shimmer 2s infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -26,9 +28,20 @@ module.exports = {
           '0%': { transform: 'translateX(-20px)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+          '50%': { opacity: '0.8', boxShadow: '0 0 30px rgba(59, 130, 246, 0.8)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
       },
       colors: {
-        // Your existing primary color palette
         primary: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -41,12 +54,10 @@ module.exports = {
           800: '#166534',
           900: '#14532d',
         },
-        // ADDED: New brand colors used in the upgraded components
-        'brand-yellow': '#FBBF24', // A bright, welcoming yellow
-        'brand-blue': '#2563EB',   // A professional, trustworthy blue for chemicals
-        'brand-orange': '#F97316', // A robust, industrial orange for the corp
+        'brand-yellow': '#FBBF24',
+        'brand-blue': '#2563EB',
+        'brand-orange': '#F97316',
       },
-      // Your existing font families are great.
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
@@ -54,4 +65,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
