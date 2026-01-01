@@ -490,7 +490,7 @@ export default function Home() {
                     duration: 2,
                     repeat: Infinity,
                     ease: 'easeOut',
-                  }}
+                  }},
                 >
                   <span className="relative z-10 text-lg">★</span>
                 </motion.div>
@@ -902,6 +902,7 @@ export default function Home() {
       </motion.section>
 
       {/* ==================== ENHANCED STATS SECTION ==================== */}
+      <div ref={statsRef}></div>
       <motion.section
         ref={statsRef}
         className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-40 overflow-hidden"
@@ -1062,6 +1063,7 @@ export default function Home() {
           </motion.div>
         </div>
       </motion.section>
+      
 
       {/* ==================== ENHANCED CONTACT SECTION ==================== */}
       <motion.section
