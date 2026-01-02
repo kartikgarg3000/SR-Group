@@ -5,6 +5,12 @@ import Image from "next/image";
 import BusinessCarousel from "@/components/BusinessCarousel";
 import { siteStats } from "@/lib/data";
 import { motion, Variants, useScroll, useTransform } from "framer-motion";
+import dynamic from 'next/dynamic';
+
+const CountUpClient = dynamic(() => import('@/components/CountUpClient'), {
+  ssr: false,
+});
+
 import CountUp from "react-countup";
 import { useRef } from "react";
 import {
@@ -61,32 +67,42 @@ export default function Home() {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
-  return (
-    <main className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden">
-      {/* ================= HERO – BUSINESS CAROUSEL ================= */}
-      <div className="relative h-screen">
-        <BusinessCarousel />
+ return (
+  <main className="min-h-screen bg-white text-gray-900 font-sans overflow-x-hidden">
+    {/* ================= HERO – BUSINESS CAROUSEL ================= */}
+    <div className="relative h-screen">
+      <BusinessCarousel />
+    </div>
+
+    {/* ================= ABOUT US – ENTERPRISE LEVEL ================= */}
+    <motion.section
+      id="about"
+      className="py-40 px-4 max-w-7xl mx-auto relative overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={sectionVariants}
+    >
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
+            backgroundSize: '50px 50px',
+          }}
+        />
       </div>
 
-      {/* ================= ABOUT US – ENTERPRISE LEVEL ================= */}
-      <motion.section
-        id="about"
-        className="py-40 px-4 max-w-7xl mx-auto relative overflow-hidden"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={sectionVariants}
-      >
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
-              backgroundSize: '50px 50px',
-            }}
-          />
-        </div>
+      {/* CONTENT WRAPPER */}
+      <div className="relative z-10">
+        {/* 👉 put ABOUT content here */}
+      </div>
+    </motion.section>
+  </main>
+);
+
 
         {/* Enhanced Title Section */}
         <div className="text-center mb-32 relative z-10">
@@ -378,7 +394,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative space-y-16">
+            {/* <div className="relative space-y-16"> */}
               {/* Enhanced Timeline line */}
               <motion.div
                 className="absolute left-8 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-purple-500 to-blue-400 rounded-full"
@@ -475,39 +491,43 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
-                <motion.div
-                  className="absolute left-0 top-3 h-12 w-12 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 ring-4 ring-white shadow-xl flex items-center justify-center text-white font-bold relative group"
-                  whileHover={{ scale: 1.15, rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                  animate={{
-                    boxShadow: [
-                      '0 0 0 0 rgba(251, 191, 36, 0.7)',
-                      '0 0 0 10px rgba(251, 191, 36, 0)',
-                      '0 0 0 0 rgba(251, 191, 36, 0)',
-                    ],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeOut',
-                  }},
-                >
-                  <span className="relative z-10 text-lg">★</span>
-                </motion.div>
-                <motion.div
-                  className="bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 p-6 rounded-2xl border-2 border-amber-200 shadow-lg hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
-                  whileHover={{ y: -5 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                  />
-                  <h4 className="text-xl font-bold text-amber-700 mb-3 relative z-10">Today — Market Leader</h4>
-                  <p className="text-gray-700 relative z-10">A trusted diversified powerhouse delivering excellence across multiple industries.</p>
-                </motion.div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+               <motion.div
+  className="absolute left-0 top-3 h-12 w-12 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 ring-4 ring-white shadow-xl flex items-center justify-center text-white font-bold group"
+  whileHover={{ scale: 1.15, rotate: 360 }}
+  animate={{
+    boxShadow: [
+      "0 0 0 0 rgba(251, 191, 36, 0.7)",
+      "0 0 0 10px rgba(251, 191, 36, 0)",
+      "0 0 0 0 rgba(251, 191, 36, 0)",
+    ],
+  }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeOut",
+  }}
+>
+  <span className="relative z-10 text-lg">★</span>
+</motion.div>
+
+               <motion.div
+  className="bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 p-6 rounded-2xl border-2 border-amber-200 shadow-lg hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
+  whileHover={{ y: -5 }}
+>
+  {/* Shimmer animation */}
+  <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+  />
+
+  <h4 className="text-xl font-bold text-amber-700 mb-3 relative z-10">
+    Today — Market Leader
+  </h4>
+
+  <p className="text-gray-700 relative z-10">
+    A trusted diversified powerhouse delivering excellence across multiple industries.
+  </p>
+</motion.div>
+
 
         {/* Enhanced Mission Vision Values */}
         <div className="mb-40">
@@ -805,145 +825,139 @@ export default function Home() {
             </motion.div>
 
             {/* Enhanced SR Industrial Corp */}
-            <motion.div
-              className="group relative bg-gradient-to-br from-orange-50 via-white to-orange-50/30 p-12 rounded-3xl border-2 border-orange-100 shadow-xl hover:shadow-2xl hover:border-orange-400 transition-all duration-500 overflow-hidden"
-              custom={1}
-              variants={cardVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
-              <motion.div
-                className="absolute -top-20 -right-20 w-48 h-48 bg-orange-200 rounded-full opacity-10 group-hover:opacity-20 transition-opacity blur-3xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  x: [0, 20, 0],
-                  y: [0, 20, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: 0.5,
-                }}
-              />
-              
-              <div className="relative z-10">
-                <motion.h4
-                  className="text-4xl md:text-5xl font-bold mb-10 text-gray-900 flex items-center gap-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <motion.span
-                    className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 group-hover:from-orange-200 group-hover:to-orange-300 transition-all duration-300 shadow-lg"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <FaBoxOpen className="text-orange-600 text-2xl" />
-                  </motion.span>
-                  SR Industrial Corp
-                </motion.h4>
-                
-                <p className="text-gray-700 mb-10 text-lg md:text-xl leading-relaxed">
-                  Authorized C&amp;F agent for Waterproofing Solutions and a leading distributor of premium dry fruits sourced from India&apos;s finest regions.
-                </p>
+<motion.div
+  className="group relative bg-gradient-to-br from-orange-50 via-white to-orange-50/30 p-12 rounded-3xl border-2 border-orange-100 shadow-xl hover:shadow-2xl hover:border-orange-400 transition-all duration-500 overflow-hidden"
+  custom={1}
+  variants={cardVariants}
+  whileHover={{ y: -10, scale: 1.02 }}
+>
+  <motion.div
+    className="absolute -top-20 -right-20 w-48 h-48 bg-orange-200 rounded-full opacity-10 group-hover:opacity-20 transition-opacity blur-3xl"
+    animate={{
+      scale: [1, 1.2, 1],
+      x: [0, 20, 0],
+      y: [0, 20, 0],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay: 0.5,
+    }}
+  />
 
-                <div className="grid grid-cols-2 gap-4 text-gray-800 text-base mb-10">
-                  {[
-                    { icon: FaBoxOpen, label: 'Sealan Blocks' },
-                    { icon: FaTree, label: 'Almonds & Cashews' },
-                    { icon: FaTree, label: 'Walnuts & Pistachios' },
-                    { icon: FaTree, label: 'Raisins & RCN' },
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="flex items-center gap-3 p-4 rounded-xl bg-white border-2 border-orange-100 hover:border-orange-300 transition-all duration-300 group/item"
-                      whileHover={{ x: 5, scale: 1.02 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + idx * 0.1 }}
-                    >
-                      <item.icon className="text-orange-600 flex-shrink-0 text-lg group-hover/item:scale-110 transition-transform" />
-                      <span className="font-medium">{item.label}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link
-                    href="/industrial"
-                    className="group/btn relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-full font-semibold text-lg hover:from-orange-700 hover:to-orange-800 transform transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden"
-                  >
-                    <motion.div
-                      className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                      whileHover={{
-                        translateX: ['-100%', '200%'],
-                      }}
-                      transition={{
-                        duration: 0.6,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                    <span className="relative z-10">Explore</span>
-                    <motion.span
-                      className="relative z-10"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <FaArrowRight />
-                    </motion.span>
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ==================== ENHANCED STATS SECTION ==================== */}
-      <div ref={statsRef}></div>
-      <motion.section
-        ref={statsRef}
-        className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-40 overflow-hidden"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
+  <div className="relative z-10">
+    <motion.h4
+      className="text-4xl md:text-5xl font-bold mb-10 text-gray-900 flex items-center gap-4"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.2 }}
+    >
+      <motion.span
+        className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 group-hover:from-orange-200 group-hover:to-orange-300 transition-all duration-300 shadow-lg"
+        whileHover={{ rotate: 360, scale: 1.1 }}
+        transition={{ duration: 0.6 }}
       >
-        {/* Advanced Animated Background */}
+        <FaBoxOpen className="text-orange-600 text-2xl" />
+      </motion.span>
+      SR Industrial Corp
+    </motion.h4>
+
+    <p className="text-gray-700 mb-10 text-lg md:text-xl leading-relaxed">
+      Authorized C&amp;F agent for Waterproofing Solutions and a leading distributor of premium dry fruits sourced from India&apos;s finest regions.
+    </p>
+
+    <div className="grid grid-cols-2 gap-4 text-gray-800 text-base mb-10">
+      {[
+        { icon: FaBoxOpen, label: 'Sealan Blocks' },
+        { icon: FaTree, label: 'Almonds & Cashews' },
+        { icon: FaTree, label: 'Walnuts & Pistachios' },
+        { icon: FaTree, label: 'Raisins & RCN' },
+      ].map((item, idx) => (
         <motion.div
-          className="absolute inset-0 opacity-10"
-          style={{ y: backgroundY }}
+          key={idx}
+          className="flex items-center gap-3 p-4 rounded-xl bg-white border-2 border-orange-100 hover:border-orange-300 transition-all duration-300 group/item"
+          whileHover={{ x: 5, scale: 1.02 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 + idx * 0.1 }}
         >
-          <motion.div
-            className="absolute top-10 left-10 w-96 h-96 bg-blue-500 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.3, 1],
-              x: [0, 50, 0],
-              y: [0, 50, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-          <motion.div
-            className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              x: [0, -50, 0],
-              y: [0, -50, 0],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 1,
-            }}
-          />
+          <item.icon className="text-orange-600 flex-shrink-0 text-lg group-hover/item:scale-110 transition-transform" />
+          <span className="font-medium">{item.label}</span>
         </motion.div>
+      ))}
+    </div>
+
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Link
+        href="/industrial"
+        className="group/btn relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-full font-semibold text-lg hover:from-orange-700 hover:to-orange-800 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden"
+      >
+        <motion.div
+          className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          whileHover={{ translateX: ['-100%', '200%'] }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
+        />
+        <span className="relative z-10">Explore</span>
+        <motion.span
+          className="relative z-10"
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <FaArrowRight />
+        </motion.span>
+      </Link>
+    </motion.div>
+  </div>
+</motion.div>
+
+     {/* ==================== ENHANCED STATS SECTION ==================== */}
+<motion.section
+  ref={statsRef}
+  className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-40 overflow-hidden"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  variants={sectionVariants}
+>
+  {/* Advanced Animated Background */}
+  <motion.div
+    className="absolute inset-0 opacity-10"
+    style={{ y: backgroundY }}
+  >
+    <motion.div
+      className="absolute top-10 left-10 w-96 h-96 bg-blue-500 rounded-full blur-3xl"
+      animate={{
+        scale: [1, 1.3, 1],
+        x: [0, 50, 0],
+        y: [0, 50, 0],
+      }}
+      transition={{
+        duration: 15,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+    <motion.div
+      className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"
+      animate={{
+        scale: [1, 1.2, 1],
+        x: [0, -50, 0],
+        y: [0, -50, 0],
+      }}
+      transition={{
+        duration: 18,
+        repeat: Infinity,
+        ease: 'easeInOut',
+        delay: 1,
+      }}
+    />
+  </motion.div>
+
+  {/* Your stats content goes here */}
+</motion.section>
 
         {/* Animated Mesh Gradient */}
         <motion.div
@@ -1020,49 +1034,44 @@ export default function Home() {
                     backgroundSize: '200% 200%',
                   }}
                 />
+{/* Shine Effect */}
+<motion.div
+  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000"
+/>
 
-                {/* Shine Effect */}
-                <motion.div
-                  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000"
-                />
+<div className="relative z-10 text-center">
+  <motion.p
+    className="text-6xl md:text-7xl lg:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-blue-200 mb-6"
+    initial={{ scale: 0.8, opacity: 0 }}
+    whileInView={{ scale: 1, opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{
+      duration: 0.6,
+      delay: index * 0.15,
+      ease: [0.16, 1, 0.3, 1],
+    }}
+  >
+    <CountUpClient end={stat.value} suffix={stat.suffix} />
+  </motion.p>
 
-                <div className="relative z-10 text-center">
-                  <motion.p
-                    className="text-6xl md:text-7xl lg:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-blue-200 mb-6"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <CountUp end={stat.value} duration={3} enableScrollSpy scrollSpyOnce />
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
-                    >
-                      {stat.suffix}
-                    </motion.span>
-                  </motion.p>
-                  <motion.p
-                    className="text-lg md:text-xl font-semibold text-white/90 tracking-wide"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                  >
-                    {stat.label}
-                  </motion.p>
-                </div>
+  <motion.p
+    className="text-lg md:text-xl font-semibold text-white/90 tracking-wide"
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{
+      delay: 0.3 + index * 0.1,
+      duration: 0.5,
+    }}
+  >
+    {stat.label}
+  </motion.p>
+</div>
 
-                {/* Decorative Corner Elements */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-60" />
-                <div className="absolute bottom-4 left-4 w-2 h-2 bg-purple-400 rounded-full opacity-60" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+{/* Decorative Corner Elements */}
+<div className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-60" />
+<div className="absolute bottom-4 left-4 w-2 h-2 bg-purple-400 rounded-full opacity-60" />
+
       
 
       {/* ==================== ENHANCED CONTACT SECTION ==================== */}
@@ -1143,70 +1152,64 @@ export default function Home() {
             Looking to place an order, collaborate, or discuss partnerships? Our team is here to help you build something remarkable.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link
-              href="/contact"
-              className="group relative inline-flex items-center justify-center gap-4 px-14 py-6 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-full font-bold text-lg md:text-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-            >
-              {/* Shimmer Effect */}
-              <motion.div
-                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                animate={{
-                  translateX: ['-100%', '200%'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                  ease: 'easeInOut',
-                }}
-              />
-              
-              <span className="relative z-10">Get In Touch</span>
-              <motion.span
-                className="relative z-10 text-2xl"
-                animate={{ x: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                →
-              </motion.span>
-              
-              {/* Glow Effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full bg-blue-400 opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-300"
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-            </Link>
-          </motion.div>
+         <motion.div
+  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <Link
+    href="/contact"
+    aria-label="Get in touch"
+    className="group relative inline-flex items-center justify-center gap-4 px-14 py-6 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-full font-bold text-lg md:text-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
+  >
+    {/* Shimmer Effect */}
+    <motion.div
+      className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
+      animate={{ translateX: ['-100%', '200%'] }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        repeatDelay: 2,
+        ease: 'easeInOut',
+      }}
+    />
 
-          <motion.p
-            className="mt-12 text-gray-600 font-medium text-lg"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-2">
-              <span className="text-2xl">📞</span>
-              Or call us directly for immediate assistance
-            </span>
-          </motion.p>
+    <span className="relative z-10">Get In Touch</span>
+
+    <motion.span
+      className="relative z-10 text-2xl"
+      animate={{ x: [0, 8, 0] }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      →
+    </motion.span>
+
+    {/* Glow Effect */}
+    <motion.div
+      className="absolute inset-0 rounded-full bg-blue-400 opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-300"
+      animate={{ scale: [1, 1.2, 1] }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+  </Link>
+</motion.div>
+
+<motion.p
+  className="mt-12 text-gray-600 font-medium text-lg text-center"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.5 }}
+>
+  <span className="inline-flex items-center gap-2">
+    <span className="text-2xl">📞</span>
+    Or call us directly for immediate assistance
+  </span>
+</motion.p>
         </motion.div>
-      </motion.section>
-    </main>
-  );
-}
