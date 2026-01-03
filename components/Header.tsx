@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent, Variants } from 'framer-motion';
 import { navLinks } from '@/lib/data';
 import { FaChevronDown } from 'react-icons/fa';
 
@@ -23,7 +23,7 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     hidden: { 
       opacity: 0, 
       height: 0,
@@ -36,13 +36,16 @@ export default function Header() {
     },
   };
 
-  const menuItemVariants = {
+  const menuItemVariants: Variants = {
     hidden: { opacity: 0, y: -15, x: -20 },
     visible: { 
       opacity: 1, 
       y: 0,
       x: 0,
-      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+      transition: { 
+        duration: 0.4, 
+        ease: [0.16, 1, 0.3, 1] as const
+      }
     },
   };
 
@@ -160,12 +163,11 @@ export default function Header() {
                       {/* Gradient Top Border */}
                       <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500" />
                       <div className="py-3">
-                        {link.subLinks.map((subLink, subIdx) => (
+                        {link.subLinks.map((subLink) => (
                           <motion.div
                             key={subLink.label}
                             initial={{ opacity: 0, x: -10 }}
                             whileHover={{ opacity: 1, x: 0 }}
-                            transition={{ delay: subIdx * 0.05 }}
                           >
                             <Link
                               href={subLink.href}
@@ -335,7 +337,7 @@ export default function Header() {
                         {link.label}
                       </h4>
                       <div className="flex flex-col pl-6 space-y-2">
-                        {link.subLinks.map((subLink, subIdx) => (
+                        {link.subLinks.map((subLink) => (
                           <Link
                             key={subLink.label}
                             href={subLink.href}
