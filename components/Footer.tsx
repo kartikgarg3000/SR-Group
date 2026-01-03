@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navLinks } from "@/lib/data";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import {
   FaFacebook,
   FaLinkedin,
@@ -27,18 +27,18 @@ const socialLinks = [
   { href: 'https://instagram.com/your-page', icon: FaInstagram, label: 'Instagram', color: 'from-pink-500 to-purple-600' },
 ];
 
-const linkVariants = {
+// Fixed: Properly typed variants
+const linkVariants: Variants = {
   hidden: { opacity: 0, y: 10, x: -10 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     y: 0,
     x: 0,
     transition: {
-      delay: i * 0.05,
       duration: 0.4,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.16, 1, 0.3, 1] as const,
     },
-  }),
+  },
 };
 
 export default function Footer() {
@@ -203,7 +203,7 @@ export default function Footer() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  custom={index}
+                  transition={{ delay: index * 0.05 }}
                 >
                   {link.href ? (
                     <Link
@@ -217,7 +217,7 @@ export default function Footer() {
                       <FaArrowRight className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-sm" />
                     </Link>
                   ) : link.subLinks ? (
-                    link.subLinks.map((subLink, subIndex) => (
+                    link.subLinks.map((subLink) => (
                       <Link
                         key={`sublink-${subLink.href}`}
                         href={subLink.href}
@@ -267,7 +267,7 @@ export default function Footer() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  custom={index}
+                  transition={{ delay: index * 0.05 }}
                 >
                   <Link
                     href={business.href}
