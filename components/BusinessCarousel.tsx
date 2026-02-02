@@ -60,31 +60,24 @@ export default function BusinessCarousel() {
     <div ref={containerRef} className="w-full relative h-screen overflow-hidden">
       {/* Animated background particles - Only render on client */}
       {isClient && (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => {
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {[...Array(10)].map((_, i) => {
             const randomX = Math.random() * 100;
             const randomY = Math.random() * 100;
-            const randomDelay = Math.random() * 5;
-            const randomDuration = Math.random() * 10 + 10;
+            const randomDuration = Math.random() * 20 + 20;
             
             return (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-white/20 rounded-full"
-                initial={{
-                  x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : 0,
-                  y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : 0,
-                  opacity: 0,
-                }}
+                className="absolute w-1 h-1 bg-white/10 rounded-full blur-[1px] will-change-transform"
                 animate={{
-                  y: typeof window !== 'undefined' ? [null, Math.random() * window.innerHeight] : [0, 0],
-                  x: typeof window !== 'undefined' ? [null, Math.random() * window.innerWidth] : [0, 0],
-                  opacity: [0, 0.5, 0],
+                  y: ['0vh', '100vh'],
+                  opacity: [0, 0.3, 0],
                 }}
                 transition={{
                   duration: randomDuration,
                   repeat: Infinity,
-                  delay: randomDelay,
+                  delay: i * 2,
                   ease: 'linear',
                 }}
                 style={{
