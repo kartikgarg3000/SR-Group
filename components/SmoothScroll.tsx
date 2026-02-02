@@ -1,9 +1,8 @@
 'use client';
 
-import { ReactLenis } from '@studio-freight/react-lenis';
+import { ReactLenis } from 'lenis/react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function SmoothScroll({ children }: { children: any }) {
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   return (
     <ReactLenis root options={{ 
       lerp: 0.08, 
